@@ -3,20 +3,20 @@ import { sign } from "jsonwebtoken";
 import { prisma } from "../../../database/prismaClient";
 
 interface IAuthenticateUser {
-  email: string;
+  username: string;
   password: string;
 }
 
 export class AuthenticateUserUseCase {
-  async execute({ password, email }: IAuthenticateUser) {
+  async execute({ password, username }: IAuthenticateUser) {
     const client = await prisma.users.findFirst({
       where: {
-        email,
+        username,
       },
     });
 
     if (!client) {
-      throw new Error("Usuário com este email não existe");
+      throw new Error("Usuário não encontrado!");
     }
 
     const passwordMath = await compare(password, client.password);
@@ -25,7 +25,12 @@ export class AuthenticateUserUseCase {
       throw new Error("Senha incorreta!");
     }
 
-    const token = sign({ email }, "e87dc0aa180c34b3f273b334b32c18a3", {
+    const md5Hash = process.env.MD5_HASH;
+    if (!md5Hash) {
+      throw new Error("MD5_HASH não foi definido");
+    }
+
+    const token = sign({ username }, md5Hash, {
       subject: client.id,
       expiresIn: "1d",
     });

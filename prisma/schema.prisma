@@ -37,7 +37,7 @@ model Goals {
 
 model Users {
   id       String     @unique @default(uuid())
-  name     String
+  username String
   email    String     @unique
   phone    String
   password String

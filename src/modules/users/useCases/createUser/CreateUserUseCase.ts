@@ -21,12 +21,12 @@ export class CreateUserUseCase {
     if (userAlreadyExists) {
       throw new Error("Já existe um usuário com este e-mail!");
     }
-    const passwordHase = await hash(password, 10);
+    const passwordHash = await hash(password, 10);
     const user = await prisma.users.create({
       data: {
-        name: username,
+        username,
         email,
-        password: passwordHase,
+        password: passwordHash,
         phone,
       },
       select: {

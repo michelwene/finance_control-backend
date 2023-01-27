@@ -20,13 +20,17 @@ export async function ensureAuthenticateUser(
 
   const [, token] = authToken.split(" ");
 
-  try {
-    const { sub } = verify(
-      token,
-      "e87dc0aa180c34b3f273b334b32c18a3"
-    ) as IPayload;
+  const md5Hash = process.env.MD5_HASH;
 
+  if (!md5Hash) {
+    throw new Error("MD5_HASH não foi definido");
+  }
+
+  try {
+    const { sub } = verify(token, md5Hash) as IPayload;
     request.id_user = sub;
+
+    return next();
   } catch (err) {
     return response.status(401).json({
       message: "Invalid token",
