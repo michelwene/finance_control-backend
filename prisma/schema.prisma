@@ -11,14 +11,14 @@ datasource db {
 }
 
 model Invoices {
-  id        String   @unique @default(uuid())
+  id        String    @unique @default(uuid())
   name      String
   value     Int
-  paid_at   DateTime
+  paid_at   DateTime?
   expire_at DateTime
-  status    String   @default("pending")
+  status    String    @default("pending")
   id_user   String
-  user      Users    @relation(fields: [id_user], references: [id])
+  user      Users     @relation(fields: [id_user], references: [id])
 
   @@map("invoices")
 }
