@@ -36,14 +36,13 @@ model Goals {
 }
 
 model Users {
-  id         String     @unique @default(uuid())
-  name       String
-  email      String     @unique
-  phone      String
-  password   String
-  invoice_id String
-  invoices   Invoices[]
-  goals      Goals[]
+  id       String     @unique @default(uuid())
+  name     String
+  email    String     @unique
+  phone    String
+  password String
+  invoices Invoices[]
+  goals    Goals[]
 
   @@map("users")
 }
