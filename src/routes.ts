@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ensureAuthenticateUser } from "./middlewares/ensureAuthenticateUser";
 import { AuthenticateUserController } from "./modules/account/autheticateUser/AuthenticateUserController";
 import { CreateGoalController } from "./modules/goals/useCases/createGoal/CreateGoalController";
+import { DeleteGoalController } from "./modules/goals/useCases/deleteGoal/DeleteGoalController";
 import { CreateInvoiceController } from "./modules/invoices/useCases/createInvoice/CreateInvoiceController";
 import { DeleteInvoiceController } from "./modules/invoices/useCases/deleteInvoice/DeleteInvoiceController";
 import { CreateUserController } from "./modules/users/useCases/createUser/CreateUserController";
@@ -15,6 +16,7 @@ const createInvoiceController = new CreateInvoiceController();
 const authenticateUserController = new AuthenticateUserController();
 
 const deleteInvoiceController = new DeleteInvoiceController();
+const deleteGoalController = new DeleteGoalController();
 
 routes.post("/user", createUserController.handle);
 routes.post("/goal", ensureAuthenticateUser, createGoalController.handle);
@@ -27,5 +29,7 @@ routes.delete(
   ensureAuthenticateUser,
   deleteInvoiceController.handle
 );
+
+routes.delete("/goal/:id", ensureAuthenticateUser, deleteGoalController.handle);
 
 export { routes };
