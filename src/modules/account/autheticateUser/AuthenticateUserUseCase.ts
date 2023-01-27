@@ -7,7 +7,7 @@ interface IAuthenticateUser {
   password: string;
 }
 
-export class AuthenticaUserUseCase {
+export class AuthenticateUserUseCase {
   async execute({ password, email }: IAuthenticateUser) {
     const client = await prisma.users.findFirst({
       where: {
