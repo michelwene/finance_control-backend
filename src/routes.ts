@@ -6,6 +6,7 @@ import { DeleteGoalController } from "./modules/goals/useCases/deleteGoal/Delete
 import { FindAllGoalsController } from "./modules/goals/useCases/findAllGoals/FindAllGoalsController";
 import { CreateInvoiceController } from "./modules/invoices/useCases/createInvoice/CreateInvoiceController";
 import { DeleteInvoiceController } from "./modules/invoices/useCases/deleteInvoice/DeleteInvoiceController";
+import { FindAllInvoicesController } from "./modules/invoices/useCases/findAllInvoices/FindAllInvoicesController";
 import { CreateUserController } from "./modules/users/useCases/createUser/CreateUserController";
 
 const routes = Router();
@@ -20,6 +21,7 @@ const deleteInvoiceController = new DeleteInvoiceController();
 const deleteGoalController = new DeleteGoalController();
 
 const findlAllGoalsController = new FindAllGoalsController();
+const findlAllInvoicesController = new FindAllInvoicesController();
 
 routes.post("/user", createUserController.handle);
 routes.post("/goal", ensureAuthenticateUser, createGoalController.handle);
@@ -36,5 +38,10 @@ routes.delete(
 routes.delete("/goal/:id", ensureAuthenticateUser, deleteGoalController.handle);
 
 routes.get("/goals", ensureAuthenticateUser, findlAllGoalsController.handle);
+routes.get(
+  "/invoices",
+  ensureAuthenticateUser,
+  findlAllInvoicesController.handle
+);
 
 export { routes };
