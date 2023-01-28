@@ -4,10 +4,13 @@ import { AuthenticateUserController } from "./modules/account/autheticateUser/Au
 import { CreateGoalController } from "./modules/goals/useCases/createGoal/CreateGoalController";
 import { DeleteGoalController } from "./modules/goals/useCases/deleteGoal/DeleteGoalController";
 import { FindAllGoalsController } from "./modules/goals/useCases/findAllGoals/FindAllGoalsController";
+import { UpdateGoalController } from "./modules/goals/useCases/updateGoal/updateGoalController";
 import { CreateInvoiceController } from "./modules/invoices/useCases/createInvoice/CreateInvoiceController";
 import { DeleteInvoiceController } from "./modules/invoices/useCases/deleteInvoice/DeleteInvoiceController";
 import { FindAllInvoicesController } from "./modules/invoices/useCases/findAllInvoices/FindAllInvoicesController";
+import { UpdateInvoiceController } from "./modules/invoices/useCases/updateInvoice/updateInvoiceController";
 import { CreateUserController } from "./modules/users/useCases/createUser/CreateUserController";
+import { UpdateUserController } from "./modules/users/useCases/updateUser/UpdateUserController";
 
 const routes = Router();
 
@@ -22,6 +25,10 @@ const deleteGoalController = new DeleteGoalController();
 
 const findlAllGoalsController = new FindAllGoalsController();
 const findlAllInvoicesController = new FindAllInvoicesController();
+
+const updateUserController = new UpdateUserController();
+const updateInvoiceController = new UpdateInvoiceController();
+const updateGoalController = new UpdateGoalController();
 
 routes.post("/user", createUserController.handle);
 routes.post("/goal", ensureAuthenticateUser, createGoalController.handle);
@@ -43,5 +50,13 @@ routes.get(
   ensureAuthenticateUser,
   findlAllInvoicesController.handle
 );
+
+routes.put("/user", ensureAuthenticateUser, updateUserController.handle);
+routes.put(
+  "/invoice/:id",
+  ensureAuthenticateUser,
+  updateInvoiceController.handle
+);
+routes.put("/goal/:id", ensureAuthenticateUser, updateGoalController.handle);
 
 export { routes };
