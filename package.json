@@ -17,7 +17,7 @@
     "build": "prisma generate && prisma migrate deploy",
     "prisma:generate": "prisma generate",
     "start": "--ignore-watch node_modules node src/server.ts",
-    "postinstall": "$(yarn bin)/pm2 install typecsript"
+    "postinstall": "$(yarn bin)/pm2 install typescript"
   },
   "dependencies": {
     "@prisma/client": "^4.9.0",
