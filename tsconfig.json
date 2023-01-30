@@ -8,8 +8,5 @@
     "moduleResolution": "node",
     "target": "ESNext",
     "esModuleInterop": true
-  },
-     "ts-node": {
-        "esm": true
-    }
+  }
 }
