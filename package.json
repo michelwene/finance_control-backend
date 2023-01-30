@@ -14,7 +14,7 @@
   },
   "scripts": {
     "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts",
-    "start": "./node_modules/.bin/pm2 start src/server.ts prisma generate prisma migrate deploy --watch"
+    "start": "./node_modules/.bin/pm2 start src/server.ts --watch"
   },
   "dependencies": {
     "@prisma/client": "^4.9.0",
