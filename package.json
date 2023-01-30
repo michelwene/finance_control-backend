@@ -16,7 +16,8 @@
     "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server.ts",
     "build": "prisma generate && prisma migrate deploy",
     "prisma:generate": "prisma generate",
-    "start": "--ignore-watch node_modules node src/server.ts"
+    "start": "--ignore-watch node_modules node src/server.ts",
+    "postinstall": "$(yarn bin)/pm2 install typecsript"
   },
   "dependencies": {
     "@prisma/client": "^4.9.0",
