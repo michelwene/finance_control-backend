@@ -9,10 +9,10 @@ app.use(express.json());
 app.use(routes);
 
 app.use(
-  (err: Error, request: Request, response: Response, next: NextFunction) => {
-    if (err instanceof Error) {
+  (error: Error, request: Request, response: Response, next: NextFunction) => {
+    if (error instanceof Error) {
       response.status(400).json({
-        message: err.message,
+        message: error.message,
       });
     }
     return response.status(500).json({
